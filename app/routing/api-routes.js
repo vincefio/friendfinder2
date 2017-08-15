@@ -42,12 +42,13 @@ module.exports = function(app){
 
 		//alert user of their best match
 		console.log('best match is ' + friendList[bestMatchIndex].name + "!")
-
+		var bestMatch = friendList[bestMatchIndex]
 		//push new friend to the frienList
 		friendList.push(req.body)
 		console.log('new friend list ' + friendList.length)
 
-		res.json(friendList)
+
+		res.json(bestMatch)
 	})
 
 }

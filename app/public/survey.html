@@ -24,6 +24,7 @@
 	</style>
 </head>
 <body>
+	
 	<div class="container">
 		<h2>Survey Questions</h2>
 		<hr>
@@ -128,8 +129,30 @@
             <option value="5">5 (Strongly Agree)</option>
      </select>
 
-     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">
+     <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"  data-toggle="modal" data-target="#myModal">
  		Submit</button>
+
+ 		<!-- Bootstrap Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel">Best Friend Match!</h4>
+	      </div>
+	      <div class="modal-body" id="modal-name">
+	      </div>
+	       <img src="" class="modal-body" id="modal-img">
+	      </img>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	     
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- end of modal -->
+
      
 	</div>
 	<script >
@@ -139,12 +162,13 @@
 	//add information to tableData array
 		$("#submit").on("click", function(event) {
 			event.preventDefault()
-
+			console.log($("#user").val())
 			//validate that there is info in user and photo
 			if($("#user").val() == ""){
 				$('#userInput1').addClass("hidden")
 				$('#inputError1').removeClass("hidden")
 				alert('Please fill out all forms before submitting!')
+				$("#user").empty()
 				//prevent form from submitting
 				return false
 			}
@@ -177,8 +201,16 @@
 			//ajax post call w .done method
 			$.post("/api/new", newFriend).done(function(data){
 				console.log("adding friend...")
+				// console.log('best match '+ data.name)
+
+				//fill in the modal with results from the ajax call
+				 $("#modal-name").text(data.name);
+         $("#modal-img").attr("src", data.photo);
+
+
 			})
 		})
+		
 	</script>
 </body>
 

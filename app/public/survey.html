@@ -16,19 +16,36 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="/./css/style.css">
+	<style>
+		#submit{
+		margin: 15px 0 25px 0;
+		}
+
+	</style>
 </head>
 <body>
 	<div class="container">
 		<h2>Survey Questions</h2>
 		<hr>
 		<h2>About You</h2>
-		<div class="form-group">
-			<label for="user">Name (required)</label>
+		<div class="form-group" id="userInput1">
+			<label for="user" >Name (required)</label>
 			<input type='text' class="form-control" id="user">
 		</div>
-			<div class="form-group">
+		     
+		<div class="form-group has-error hidden" id="inputError1">
+		  <label class="control-label" for="inputError1">Enter Name</label>
+		  <input type="text" class="form-control" id="inputErrorUser">
+		</div>
+
+			<div class="form-group" id="userInput2">
 			<label for="user">Link to photo image (required)</label>
-			<input type='text' class="form-control" id="user">
+			<input type='text' class="form-control" id="photoLink">
+		</div>
+		     
+		<div class="form-group has-error hidden" id="inputError2">
+		  <label class="control-label" for="inputError1">Enter Photo Link</label>
+		  <input type="text" class="form-control" id="inputErrorPhoto">
 		</div>
 		<hr>
 		
@@ -43,9 +60,10 @@
             <option value="5">5 (Strongly Agree)</option>
      </select>
 
+
     <h3><strong>Question 2</strong></h3>
 		<h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q2">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -56,7 +74,7 @@
      
     <h3><strong>Question 3</strong></h3>
 		<h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q3">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -67,7 +85,7 @@
      
     <h3><strong>Question 4</strong></h3>
 		<h4>You rarely do something just out of sheer curiosity.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q4">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -78,7 +96,7 @@
      
     <h3><strong>Question 5</strong></h3>
 		<h4>People can rarely upset you.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q5">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -89,7 +107,7 @@
      
     <h3><strong>Question 6</strong></h3>
 		<h4>It is often difficult for you to relate to other people’s feelings.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q6">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -101,7 +119,7 @@
     <h3><strong>Question 7</strong></h3>
 		<h4>In a discussion, truth should be more important than people’s sensitivities.
 		</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
+	 	<select data-placeholder="" class="chosen-select" id="q7">
 	 		<option value="">Select an Option</option>
             <option value="1">1 (Strongly Disagree)</option>
             <option value="2">2</option>
@@ -114,14 +132,50 @@
  		Submit</button>
      
 	</div>
-	<script>
-	//add validation script
+	<script >
+
+
+
+	//add information to tableData array
 		$("#submit").on("click", function(event) {
-			event.
-			console.log('click works')
+			event.preventDefault()
+
+			//validate that there is info in user and photo
+			if($("#user").val() == ""){
+				$('#userInput1').addClass("hidden")
+				$('#inputError1').removeClass("hidden")
+				//prevent form from submitting
+				return false
+			}
+
+			else if($("#photoLink").val() == ""){
+				$('#userInput2').addClass("hidden")
+				$('#inputError2').removeClass("hidden")
+				//prevent form from submitting
+				return false
+			}
+			
 			//add new person in object form
+			var newFriend = {
+				name: $("#user").val().trim(),
+				photo: $("#photoLink").val().trim(),
+				scores: [
+					$("#q1").val(),
+					$("#q2").val(),
+					$("#q3").val(),
+					$("#q4").val(),
+					$("#q5").val(),
+					$("#q6").val(),
+					$("#q7").val()
+				]
+			}
+
+			console.log(newFriend)
 
 			//ajax post call w .done method
+			$.post("/api/new", newFriend).done(function(data){
+				console.log("adding friend...")
+			})
 		})
 	</script>
 </body>

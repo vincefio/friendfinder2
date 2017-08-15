@@ -1,0 +1,15 @@
+h3{
+	line-height: 1.5em
+}
+
+#submit{
+	margin: 15px 0 25px 0;
+}
+
+* {
+	border: solid black 1px;
+}
+
+body{
+	background-color: black;
+}

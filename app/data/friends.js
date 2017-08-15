@@ -15,6 +15,34 @@ var friendList = [
 			"5"
 		]
 
+	},
+		{
+		"name": "Mick",
+		"photo": "https://tse3.mm.bing.net/th?id=OIP.GDoDBoZ2KqxbxOvPvB9AiwEnEs&pid=15.1&P=0&w=300&h=300",
+		"scores": [
+			"1",
+			"2",
+			"3",
+			"4",
+			"5",
+			"1",
+			"2"
+		]
+
+	},
+		{
+		"name": "Charlie",
+		"photo": "https://tse2.mm.bing.net/th?id=OIP.SolO4DHQxDv2--0c8wRF9wEsCo&pid=15.1&P=0&w=369&h=208",
+		"scores": [
+			"5",
+			"4",
+			"3",
+			"2",
+			"1",
+			"4",
+			"3"
+		]
+
 	}
 ]
 

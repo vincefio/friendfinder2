@@ -144,6 +144,7 @@
 			if($("#user").val() == ""){
 				$('#userInput1').addClass("hidden")
 				$('#inputError1').removeClass("hidden")
+				alert('Please fill out all forms before submitting!')
 				//prevent form from submitting
 				return false
 			}
@@ -151,6 +152,7 @@
 			else if($("#photoLink").val() == ""){
 				$('#userInput2').addClass("hidden")
 				$('#inputError2').removeClass("hidden")
+				alert('Please fill out all forms before submitting!')
 				//prevent form from submitting
 				return false
 			}

@@ -23,31 +23,29 @@ module.exports = function(app){
 		for(var i = 0; i < friendList.length; i++){
 			var totalDifference = 0
 			console.log('current friend ' + friendList[i].name)
-			//reset scoreDifference after each new friend
-			// scoreDifference = []
+
 			for(var j = 0; j < friendScores.length; j++){
-				// scoreDifference.push(Math.abs(friendList[i].scores[j] - friendScores[j]))
-				// console.log('difference ' + scoreDifference)
+
 				totalDifference += Math.abs(friendList[i].scores[j] - friendScores[j])
 
 			}
 			scoreDifference.push(totalDifference)	
 		}
 
-			Array.max = function( scoreDifference ){
-	    	return Math.max.apply( Math, scoreDifference);
-			};
+		//function to find the smallest number in scoreDifference Array
+		Array.min = function( scoreDifference ){
+    var inOf =  Math.min.apply( Math, scoreDifference );
+    return scoreDifference.indexOf(inOf)
+		};
+		//store index of best match into an array
+		var bestMatchIndex = Array.min(scoreDifference);
 
-		console.log("array max " + Array.max(scoreDifference))
-		//loop through score differences to find a match
-		// for(var i = 0; i < scoreDifference.length; i++){
-
-		// }
-		console.log('scoreDifference ' + scoreDifference)
+		//alert user of their best match
+		console.log('best match is ' + friendList[bestMatchIndex].name + "!")
 
 		//push new friend to the frienList
 		friendList.push(req.body)
-
+		console.log('new friend list ' + friendList.length)
 
 		res.json(friendList)
 	})
